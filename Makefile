@@ -14,8 +14,6 @@ build: ## build redpanda docker image
 run: ## run redpanda docker image [91m(no persistence !)[0m
 	docker run \
 		--rm \
-		--cpuset-cpus 0-3 \
-		--memory 8g \
 		-p 19092:9092 \
 		-p 19644:9644 \
 		-i redpanda
