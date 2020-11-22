@@ -17,8 +17,8 @@ The main problem here is the inability to limit the first `cmake` workers, which
 As these workers are in fact `cc1plus` instances, a program known for its frugality, spawning 8 of them is almost guaranteed to end with an OOM, unless you are doing nothing else with your computer.
 
 `docker build` seems to happily ignore any cpu/memory restriction, leaving no choice but a two step build:
-- build a base image with all required dependencies
-- spawn a builder container (with constrained resources thanks to [LXCFS](https://github.com/lxc/lxcfs), if available) to do the heavy work itself, and commit the resulting container as our Redpanda image
+  - build a base image with all required dependencies
+  - spawn a builder container (with constrained resources thanks to [LXCFS](https://github.com/lxc/lxcfs), if available) to do the heavy work itself, and commit the resulting container as our Redpanda image
 
 Of course none of this should be necessary if upstream did not enforce `-j$(nproc)` without any override possibility (see `redpanda/cmake/oss.cmake.in` and `seastar/cooking_recipe.cmake` for details, search for `build_concurrency_factor`). Docker could also include LXCFS stuff to have reliable resource limits, it would be nice.
 
