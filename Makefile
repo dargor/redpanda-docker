@@ -9,11 +9,7 @@ help: ## show targets
 		  {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 build: ## build redpanda docker image
-	docker build \
-		--cpuset-cpus 0-3 \
-		--memory 12g \
-		-t redpanda \
-		.
+	./docker-builder.sh
 
 run: ## run redpanda docker image [91m(no persistence !)[0m
 	docker run \
