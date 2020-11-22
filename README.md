@@ -95,4 +95,12 @@ $ dmesg | ./kafka-console-producer.sh --bootstrap-server localhost:19092 --topic
 # oops !
 ```
 
-This happens only sometimes, but never with a real Kafka. It may be a bug in this version of Redpanda ?
+This happens only with more than one partition, but never with a real Kafka.
+
+It's worth noting that when I start `kafka-console-consumer.sh` with `--from-beginning`, I get all the messages:
+  - 1st run: processed 1570 messages, OK
+  - 2nd run: processed 1570 messages, OK
+  - 3rd run: processed 1346 messages, oops !
+  - restart with `--from-beginning`: processed 4710 messages, OK (= 1570 * 3)
+
+May be worth trying to reproduce with something more advanced, like [aiokafka](https://github.com/aio-libs/aiokafka).
