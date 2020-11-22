@@ -24,7 +24,9 @@ fi
 docker build -t redpanda-builder .
 
 # ensure a previous builder is not running
+set +e
 docker rm -f redpanda-builder
+set -e
 
 # start a builder container, with constrained resources
 docker run \
