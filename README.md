@@ -78,6 +78,13 @@ I lost messages when the topic has more than one partition, e.g:
 $ ./kafka-topics.sh --bootstrap-server localhost:19092 --topic test2 --create --partitions 4 --replication-factor 1
 Created topic test2.
 
+$ ./kafka-topics.sh --bootstrap-server localhost:19092 --topic test2 --describe
+Topic: test2    PartitionCount: 4    ReplicationFactor: 1    Configs: partition_count=4,replication_factor=1
+    Topic: test2    Partition: 0    Leader: 1    Replicas: 1    Isr: 1
+    Topic: test2    Partition: 1    Leader: 1    Replicas: 1    Isr: 1
+    Topic: test2    Partition: 2    Leader: 1    Replicas: 1    Isr: 1
+    Topic: test2    Partition: 3    Leader: 1    Replicas: 1    Isr: 1
+
 $ ./kafka-console-consumer.sh --bootstrap-server localhost:19092 --topic test2
 
 $ dmesg | ./kafka-console-producer.sh --bootstrap-server localhost:19092 --topic test2 --compression-codec snappy; dmesg | wc -l
