@@ -32,7 +32,7 @@ Redpanda should be accessible from ports `19092` (kafka) and `19644` (admin).
 
 This command will show Redpanda logs, use `^C` to quit.
 
-Beware: data will **not** persisted !
+Beware: data will **not** be persisted, but you may use a volume if needed.
 
 ## Usage
 
