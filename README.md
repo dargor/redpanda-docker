@@ -18,6 +18,13 @@ As these workers are in fact `cc1plus` instances, a program known for its frugal
 
 Maybe try [LXCFS](https://github.com/lxc/lxcfs) to force less cores in kernel-exposed files ? Something like `docker run --rm --cpuset-cpus 0-3 -v /var/lib/lxcfs/proc/cpuinfo:/proc/cpuinfo:rw ubuntu grep -c ^processor /proc/cpuinfo` seems to work, but I have not yet tried a build with `lxcfs`.
 
+Update: `docker build` happily ignore any cpu/memory restriction, leaving no choice but a two step build:
+  - build a base image with dependencies and a build script
+  - spawn a live container to do the build itself
+  - commit the resulting container as an image
+
+Of course none of this should be necessary if upstream did not enforce `-j$(nproc)` without any override possibility (see `redpanda/cmake/oss.cmake.in` and `seastar/cooking_recipe.cmake` for details, search `build_concurrency_factor`).
+
 ## Run
 
 ```sh
