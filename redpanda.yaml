@@ -1,0 +1,62 @@
+# Copyright 2020 Vectorized, Inc.
+#
+# Use of this software is governed by the Business Source License
+# included in the file licenses/BSL.md
+#
+# As of the Change Date specified in that file, in accordance with
+# the Business Source License, use of this software will be governed
+# by the Apache License, Version 2.0
+
+# Redpanda Queue configuration file
+
+# organization and cluster_id help Vectorized identify your system.
+organization: ""
+cluster_id: ""
+
+license_key: ""
+
+redpanda:
+  # Data directory where all the files will be stored. 
+  # This directory MUST resides on xfs partion.
+  data_directory: "/var/lib/redpanda/data"
+  
+  # Node ID - must be unique for each node
+  node_id: 1
+
+  # The initial cluster nodes addresses
+  seed_servers: []
+
+  # Redpanda server
+  rpc_server:
+    address: "0.0.0.0"
+    port: 33145
+  
+  # Kafka transport
+  kafka_api:
+    address: "0.0.0.0"
+    port: 9092
+
+  admin:
+    address: "0.0.0.0"
+    port: 9644
+
+  auto_create_topics_enabled: true
+
+rpk:
+  # Enables sending environment and resource usage data to Vectorized.
+  enable_usage_stats: false
+
+  # Available tuners
+  tune_network: false
+  tune_disk_scheduler: false
+  tune_disk_nomerges: false
+  tune_disk_irq: false
+  tune_fstrim: false
+  tune_cpu: false
+  tune_aio_events: false
+  tune_clocksource: false
+  tune_swappiness: false
+  enable_memory_locking: false
+  tune_coredump: false
+
+  #coredump_dir: "/var/lib/redpanda/coredump"
