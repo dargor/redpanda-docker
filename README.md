@@ -36,10 +36,36 @@ Beware: data will **not** be persisted, but you may use a volume if needed.
 
 ## Usage
 
+This assume standard Kafka tools (tested with `net-misc/kafka-bin-2.6.0`).
+
+### Tools
+
+```sh
+$ ./kafka-acls.sh --bootstrap-server localhost:19092 --list
+Error while executing ACL command: org.apache.kafka.common.errors.UnsupportedVersionException: The broker does not support DESCRIBE_ACLS
+
+$ ./kafka-topics.sh --bootstrap-server localhost:19092 --topic test --create --partitions 1 --replication-factor 1
+Created topic test.
+
+$ ./kafka-topics.sh --bootstrap-server localhost:19092 --list
+test
+
+$ ./kafka-topics.sh --bootstrap-server localhost:19092 --topic test --describe
+Topic: test    PartitionCount: 1    ReplicationFactor: 1    Configs: partition_count=1,replication_factor=1
+    Topic: test    Partition: 0    Leader: 1    Replicas: 1    Isr: 1
+```
+
 ### Consumer
 
-**TODO: kafka-console-consumer.sh**
+```sh
+$ ./kafka-console-consumer.sh --bootstrap-server localhost:19092 --topic test
+# no output yet, but should show producer messages
+```
 
 ### Producer
 
-**TODO: kafka-console-producer.sh**
+```sh
+$ ./kafka-console-producer.sh --bootstrap-server localhost:19092 --topic test --compression-codec snappy
+>hello there !
+>^D
+```
