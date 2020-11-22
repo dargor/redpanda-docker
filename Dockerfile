@@ -53,5 +53,5 @@ WORKDIR /build
 ADD redpanda-release-${REDPANDA_RELEASE}.tar.gz .
 
 WORKDIR /root
-EXPOSE 9092 9644
+EXPOSE 9092 9644 33145
 VOLUME /var/lib/redpanda/data
