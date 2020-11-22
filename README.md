@@ -69,3 +69,23 @@ $ ./kafka-console-producer.sh --bootstrap-server localhost:19092 --topic test --
 >hello there !
 >^D
 ```
+
+## Bugs
+
+I lost messages when the topic has more than one partition, e.g:
+
+```sh
+$ ./kafka-topics.sh --bootstrap-server localhost:19092 --topic test2 --create --partitions 4 --replication-factor 1
+Created topic test2.
+
+$ ./kafka-console-consumer.sh --bootstrap-server localhost:19092 --topic test2
+
+$ dmesg | ./kafka-console-producer.sh --bootstrap-server localhost:19092 --topic test2 --compression-codec snappy; dmesg | wc -l
+1482
+
+# then ^C the consumer, its processed messages should match dmesg lines
+^CProcessed a total of 1191 messages
+# oops !
+```
+
+This happens only sometimes, but never with a real Kafka. It may be a bug in this version of Redpanda ?
