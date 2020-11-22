@@ -16,4 +16,5 @@ run: ## run redpanda docker image [91m(no persistence !)[0m
 		--rm \
 		-p 19092:9092 \
 		-p 19644:9644 \
-		-i redpanda
+		-i redpanda \
+		/usr/local/bin/redpanda --redpanda-cfg /etc/redpanda.yaml

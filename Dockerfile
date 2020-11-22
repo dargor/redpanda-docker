@@ -56,4 +56,3 @@ WORKDIR /root
 EXPOSE 9092 9644
 COPY redpanda.yaml /etc
 VOLUME /var/lib/redpanda/data
-CMD ["/usr/local/bin/redpanda", "--redpanda-cfg", "/etc/redpanda.yaml"]
