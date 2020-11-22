@@ -34,7 +34,7 @@ docker run \
     -dit \
     ${LXCFS_OPTS:-} \
     --cpuset-cpus 0-3 \
-    --memory 8g \
+    --memory 12g \
     --name redpanda-builder \
     redpanda-builder bash
 
