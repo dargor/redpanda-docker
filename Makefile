@@ -14,6 +14,7 @@ build: ## build redpanda docker image
 run: ## run redpanda docker image [91m(no persistence !)[0m
 	docker run \
 		--rm \
+		-v $$(pwd)/redpanda.yaml:/etc/redpanda.yaml \
 		-p 19092:9092 \
 		-p 19644:9644 \
 		-i redpanda \

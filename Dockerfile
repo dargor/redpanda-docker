@@ -54,5 +54,4 @@ ADD redpanda-release-${REDPANDA_RELEASE}.tar.gz .
 
 WORKDIR /root
 EXPOSE 9092 9644
-COPY redpanda.yaml /etc
 VOLUME /var/lib/redpanda/data
