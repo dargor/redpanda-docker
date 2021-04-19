@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # set this to the desired release
 # you will also need to download the tgz,
 # and possibly add packages if you change this
-ENV REDPANDA_RELEASE=20.11.4
+ENV REDPANDA_RELEASE=v21.4.12
 
 RUN apt -qy update \
  && apt -qy install \
