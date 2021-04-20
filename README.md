@@ -69,38 +69,3 @@ $ ./kafka-console-producer.sh --bootstrap-server localhost:19092 --topic test --
 >hello there !
 >^D
 ```
-
-## Bugs
-
-I lost messages when the topic has more than one partition, e.g:
-
-```sh
-$ ./kafka-topics.sh --bootstrap-server localhost:19092 --topic test2 --create --partitions 4 --replication-factor 1
-Created topic test2.
-
-$ ./kafka-topics.sh --bootstrap-server localhost:19092 --topic test2 --describe
-Topic: test2    PartitionCount: 4    ReplicationFactor: 1    Configs: partition_count=4,replication_factor=1
-    Topic: test2    Partition: 0    Leader: 1    Replicas: 1    Isr: 1
-    Topic: test2    Partition: 1    Leader: 1    Replicas: 1    Isr: 1
-    Topic: test2    Partition: 2    Leader: 1    Replicas: 1    Isr: 1
-    Topic: test2    Partition: 3    Leader: 1    Replicas: 1    Isr: 1
-
-$ ./kafka-console-consumer.sh --bootstrap-server localhost:19092 --topic test2
-
-$ dmesg | ./kafka-console-producer.sh --bootstrap-server localhost:19092 --topic test2 --compression-codec snappy; dmesg | wc -l
-1482
-
-# then ^C the consumer, its processed messages should match dmesg lines
-^CProcessed a total of 1191 messages
-# oops !
-```
-
-This happens only with more than one partition, but never with a real Kafka.
-
-It's worth noting that when I start `kafka-console-consumer.sh` with `--from-beginning`, I get all the messages:
-  - 1st run: processed 1570 messages, OK
-  - 2nd run: processed 1570 messages, OK
-  - 3rd run: processed 1346 messages, oops !
-  - restart with `--from-beginning`: processed 4710 messages, OK (= 1570 * 3)
-
-May be worth trying to reproduce with something more advanced, like [aiokafka](https://github.com/aio-libs/aiokafka).
