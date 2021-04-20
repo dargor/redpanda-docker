@@ -2,6 +2,8 @@
 
 Try [Redpanda](https://github.com/vectorizedio/redpanda) in Docker.
 
+Please note that upstream provides docker images as well : https://vectorized.io/docs/quick-start-docker
+
 ## Build
 
 ```sh
